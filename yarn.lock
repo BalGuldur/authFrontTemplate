@@ -3833,6 +3833,10 @@ map-obj@^1.0.0, map-obj@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/map-obj/-/map-obj-1.0.1.tgz#d933ceb9205d82bdcf4886f6742bdc2b4dea146d"
 
+marked@^0.3.2:
+  version "0.3.6"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-0.3.6.tgz#b2c6c618fccece4ef86c4fc6cb8a7cbf5aeda8d7"
+
 math-expression-evaluator@^1.2.14:
   version "1.2.17"
   resolved "https://registry.yarnpkg.com/math-expression-evaluator/-/math-expression-evaluator-1.2.17.tgz#de819fdbcd84dccd8fae59c6aeb79615b9d266ac"
@@ -5397,6 +5401,28 @@ slice-ansi@0.0.4:
   version "0.0.4"
   resolved "https://registry.yarnpkg.com/slice-ansi/-/slice-ansi-0.0.4.tgz#edbf8903f66f7ce2f8eafd6ceed65e264c831b35"
 
+slm-loader@^0.2.3:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/slm-loader/-/slm-loader-0.2.3.tgz#c4c888c2e9b04ac2a52dd7f8307de5a36647da75"
+  dependencies:
+    loader-utils "^0.2.15"
+    slm "^0.5.1"
+    slm-markdown "^1.0.0"
+
+slm-markdown@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/slm-markdown/-/slm-markdown-1.0.0.tgz#d82a409702938164bcab5b5d200232173803c2f3"
+  dependencies:
+    marked "^0.3.2"
+
+slm@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/slm/-/slm-0.5.1.tgz#334bcc58c054895f11c67518c2335f9a542f5688"
+
+slm@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/slm/-/slm-1.0.0.tgz#67e46e652178eb8f029ff1b12c81e6c8bf757907"
+
 smart-buffer@^1.0.13:
   version "1.1.15"
   resolved "https://registry.yarnpkg.com/smart-buffer/-/smart-buffer-1.1.15.tgz#7f114b5b65fab3e2a35aa775bb12f0d1c649bf16"
@@ -6038,6 +6064,10 @@ vue-loader@^13.0.4:
     vue-style-loader "^3.0.0"
     vue-template-es2015-compiler "^1.6.0"
 
+vue-ls@^2.3.3:
+  version "2.3.3"
+  resolved "https://registry.yarnpkg.com/vue-ls/-/vue-ls-2.3.3.tgz#a78d62c620b8e1f30614e2dd2984eaf455e45bae"
+
 vue-router@^2.7.0:
   version "2.8.1"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-2.8.1.tgz#9833c9ee57ac83beb0269056fefee71713f20695"
@@ -6060,13 +6090,17 @@ vue-template-es2015-compiler@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.6.0.tgz#dc42697133302ce3017524356a6c61b7b69b4a18"
 
-vue@^2.4.2:
+vue@^2.5.3:
   version "2.5.3"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.3.tgz#e1a3b1f49b6e93e574ce040b95cbc873912fecc1"
 
 vuetify@^0.16.9:
   version "0.16.9"
   resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-0.16.9.tgz#fd61f219e4a40d7afe5e24a803df5658a40b38e4"
+
+vuex@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/vuex/-/vuex-3.0.1.tgz#e761352ebe0af537d4bb755a9b9dc4be3df7efd2"
 
 watchpack@^1.3.1:
   version "1.4.0"
