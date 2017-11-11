@@ -7,18 +7,22 @@ import Vuetify from 'vuetify'
 import './stylus/main.styl'
 
 import App from './App'
-import router from './router'
+
+import store from './store'
 
 import VueLocalStorage from 'vue-ls'
-Vue.use(VueLocalStorage, {namespace: 'vuejs__'})
+Vue.use(VueLocalStorage, {namespace: 'vuejs_auth_template__'})
 
 Vue.use(Vuetify)
+
+import router from './router'
 
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  store,
   router,
   template: '<App/>',
   components: { App }
