@@ -7,6 +7,7 @@ import OutGeneral from '@/components/layout/OutGeneral'
 // routes without Nav
 import Hello from '@/components/Hello'
 import Login from '@/components/Login'
+import RegCompany from '@/components/RegCompany'
 
 // routes in Nav
 
@@ -31,7 +32,8 @@ const router = new Router({
       name: 'OutGeneral',
       component: OutGeneral,
       children: [
-        { path: '/login', name: 'Login', component: Login }
+        { path: '/login', name: 'Login', component: Login },
+        { path: '/regCompany', name: 'RegCompany', component: RegCompany }
       ]
     }
   ]

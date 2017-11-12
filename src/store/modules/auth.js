@@ -19,6 +19,9 @@ const actions = {
   signIn ({dispatch, commit}, {email, password}) {
     dispatch('testSetToken')
   },
+  regCompany ({dispatch, commit}, {email, companyTitle, password}) {
+    dispatch('testSetToken')
+  },
   setToken ({commit}, token) {
     Vue.ls.set('userToken', token)
     commit('SET_JWT_TOKEN', token)
