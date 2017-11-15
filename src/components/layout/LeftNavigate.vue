@@ -21,10 +21,10 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['leftNavIsOpen', 'navItems'])
+    ...mapGetters('navigation', ['leftNavIsOpen', 'navItems'])
   },
   methods: {
-    ...mapActions(['changeNavIsOpen'])
+    ...mapActions('navigation', ['changeNavIsOpen'])
   },
   watch: {
     drawer () {

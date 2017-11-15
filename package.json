@@ -14,6 +14,7 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
+    "axios": "^0.17.1",
     "slm": "^1.0.0",
     "slm-loader": "^0.2.3",
     "vue": "^2.5.3",

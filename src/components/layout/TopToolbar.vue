@@ -5,7 +5,7 @@
     v-toolbar-title
       . {{ this.$route.name }}
     v-spacer
-    v-btn @click="login" Login
+    v-btn @click="signOut" Logout
 </template>
 
 <script>
@@ -13,7 +13,8 @@ import { mapActions } from 'vuex'
 
 export default {
   methods: {
-    ...mapActions(['changeNavIsOpen', 'login'])
+    ...mapActions('navigation', ['changeNavIsOpen']),
+    ...mapActions('auth', ['signOut'])
   }
 }
 </script>

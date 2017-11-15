@@ -3,7 +3,7 @@
     h1 Login
     v-text-field(name="input-1" label="Email" v-model="email")
     passwordInput v-model="password"
-    v-btn(flat block color="primary" outline @click="signIn({email, password})") Войти
+    v-btn(flat block color="primary" outline @click="signIn({user: {email, password}})") Войти
 </template>
 
 <script>
