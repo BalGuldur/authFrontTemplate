@@ -10,12 +10,14 @@ const apiErrorStr = 'System error on API request'
 // Api requests
 const state = {
   axios: axios,
-  errors: []
+  errors: [],
+  qtyRequestsInProgress: 0
 }
 
 const getters = {
   axios: state => state.axios,
-  errors: state => state.errors
+  errors: state => state.errors,
+  waitResponse: state => state.qtyRequestsInProgress > 0
 }
 
 const actions = {
@@ -23,21 +25,24 @@ const actions = {
   setAuthHeaders ({getters}, token) {
     getters.axios.defaults.headers.common[authHeaderName] = token
   },
-  // send request w
+  // send request to link with method and url params and data
+  // addErrorType - mutation-type for add errors on request - optional - (API_ADD_ERROR by default)
+  // withoutApiPref - boolean, don't add apiVerPrefix like 'api/1' to request link - (false by default)
   request ({getters, dispatch, commit}, {method, link, data, params, addErrorType, withoutApiPref}) {
     commit('ERASE_API_ERRORS')
+    commit('INCREMENT_WAIT_REQUESTS')
     const url = withoutApiPref ? link : apiVerPrefix + link // send request with or withoutApiPref
     return getters.axios.request({url, method, data, params}).then(
-      response => Promise.resolve(response)
-    ).catch(error => dispatch('rejectError', {error, addErrorType}))
+      response => {
+        commit('DECREMENT_WAIT_REQUESTS')
+        return Promise.resolve(response)
+      }
+    ).catch(error => {
+      commit('DECREMENT_WAIT_REQUESTS')
+      return dispatch('rejectError', {error, addErrorType})
+    })
   },
-  // get ({getters, dispatch, commit}, {link, params, addErrorType, withoutApiPref}) {
-  //   commit('ERASE_API_ERRORS')
-  //   const url = withoutApiPref ? link : apiVerPrefix + link // send request with or withoutApiPref
-  //   return getters.axios.get(url, {params}).then(
-  //     response => Promise.resolve(response)
-  //   ).catch(error => dispatch('rejectError', {error, addErrorType}))
-  // },
+  // fetch model from link with params, if success set all models from response.data
   fetchModel ({dispatch, commit}, {link, params}) {
     return dispatch('request', {method: 'get', link, params}).then(
       response => {
@@ -46,6 +51,7 @@ const actions = {
       }
     )
   },
+  // delete model from link, if success delete all models from response.data
   deleteModelItem ({dispatch, commit}, {link}) {
     return dispatch('request', {method: 'delete', link}).then(
       response => {
@@ -82,6 +88,14 @@ const mutations = {
   },
   [types.ERASE_API_ERRORS] (state) {
     state.errors = []
+  },
+  [types.INCREMENT_WAIT_REQUESTS] (state) {
+    state.qtyRequestsInProgress = state.qtyRequestsInProgress + 1
+  },
+  [types.DECREMENT_WAIT_REQUESTS] (state) {
+    if (state.qtyRequestsInProgress > 0) {
+      state.qtyRequestsInProgress = state.qtyRequestsInProgress - 1
+    }
   }
 }
 
