@@ -23,22 +23,23 @@ const actions = {
   setAuthHeaders ({getters}, token) {
     getters.axios.defaults.headers.common[authHeaderName] = token
   },
-  request ({getters, dispatch, commit}, {link, params, method, addErrorType, withoutApiPref}) {
+  // send request w
+  request ({getters, dispatch, commit}, {method, link, data, params, addErrorType, withoutApiPref}) {
     commit('ERASE_API_ERRORS')
     const url = withoutApiPref ? link : apiVerPrefix + link // send request with or withoutApiPref
-    return getters.axios.request({url, method, data: params}).then(
+    return getters.axios.request({url, method, data, params}).then(
       response => Promise.resolve(response)
     ).catch(error => dispatch('rejectError', {error, addErrorType}))
   },
-  get ({getters, dispatch, commit}, {link, params, addErrorType, withoutApiPref}) {
-    commit('ERASE_API_ERRORS')
-    const url = withoutApiPref ? link : apiVerPrefix + link // send request with or withoutApiPref
-    return getters.axios.get(url, {params}).then(
-      response => Promise.resolve(response)
-    ).catch(error => dispatch('rejectError', {error, addErrorType}))
-  },
+  // get ({getters, dispatch, commit}, {link, params, addErrorType, withoutApiPref}) {
+  //   commit('ERASE_API_ERRORS')
+  //   const url = withoutApiPref ? link : apiVerPrefix + link // send request with or withoutApiPref
+  //   return getters.axios.get(url, {params}).then(
+  //     response => Promise.resolve(response)
+  //   ).catch(error => dispatch('rejectError', {error, addErrorType}))
+  // },
   fetchModel ({dispatch, commit}, {link, params}) {
-    return dispatch('get', {link, params}).then(
+    return dispatch('request', {method: 'get', link, params}).then(
       response => {
         commit('SET_MODELS', response.data, {root: true}) // Run root mutation
         return Promise.resolve(response.data)
