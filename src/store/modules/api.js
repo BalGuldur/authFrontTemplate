@@ -38,12 +38,21 @@ const actions = {
       response => Promise.resolve(response)
     ).catch(error => dispatch('rejectError', {error, addErrorType}))
   },
+  fetchModel ({dispatch, commit}, {link, params}) {
+    return dispatch('get', {link, params}).then(
+      response => {
+        commit('SET_MODEL', response.data, {root: true}) // Run root mutation
+        return Promise.resolve(response.data)
+      }
+    )
+  },
   // return error in Promise.reject when catch error on axios requiests
   rejectError ({commit}, {error, addErrorType}) {
     if (error.response) {
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx
-      commit(addErrorType, error.response.data, {root: true})
+      const errorMutType = addErrorType || 'ADD_API_ERRORS'
+      commit(errorMutType, error.response.data, {root: true})
       return Promise.reject()
     } else if (error.request) {
       // The request was made but no response was received

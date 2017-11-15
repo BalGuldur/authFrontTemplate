@@ -10,3 +10,4 @@ export const ERASE_AUTH_ERRORS = 'ERASE_AUTH_ERRORS'
 // api
 export const ADD_API_ERRORS = 'ADD_API_ERRORS'
 export const ERASE_API_ERRORS = 'ERASE_API_ERRORS'
+export const SET_MODEL = 'SET_MODEL'

@@ -1,9 +1,8 @@
 const state = {
-  users: {}
 }
 
 const getters = {
-  users: state => state.users
+  users: state => state
 }
 
 const actions = {
