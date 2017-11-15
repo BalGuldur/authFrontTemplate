@@ -3,6 +3,9 @@ import Vue from 'vue'
 import router from '@/router'
 import { needAuthStr } from '@/initializers/AuthErrors'
 
+const addErrorType = 'auth/ADD_AUTH_ERRORS'
+const withoutApiPref = true
+
 // Get and set userToken to LocalStorage
 const getTokenFromLs = () => {
   return Vue.ls.get('userToken')
@@ -32,7 +35,7 @@ const actions = {
   signIn ({dispatch, commit}, {user}) {
     commit('ERASE_AUTH_ERRORS')
     dispatch('api/setAuthHeaders', undefined, {root: true}) // need when user token not empty, but not auth
-    dispatch('api/post', {link: '/users/sign_in.json', params: {user}, addErrorType: 'auth/ADD_AUTH_ERRORS'}, {root: true}).then(
+    dispatch('api/request', {method: 'post', link: '/users/sign_in.json', params: {user}, addErrorType, withoutApiPref}, {root: true}).then(
       response => {
         // Success sign in, set token and redirect to /
         const respToken = response.headers.authorization
@@ -54,10 +57,9 @@ const actions = {
     // Don't send request to api if token undefined (anyway it's don't auth)
     if (token) {
       dispatch('api/setAuthHeaders', token, {root: true}) // config headers for ajax requests
-      return dispatch('api/post', {link: '/check.json', addErrorType: 'auth/ADD_AUTH_ERRORS'}, {root: true}).then(
+      return dispatch('api/request', {method: 'post', link: '/check.json', addErrorType, withoutApiPref}, {root: true}).then(
         response => {
           dispatch('setToken', token)
-          console.log(response.data)
           commit('SET_CURR_USER', response.data)
           return Promise.resolve()
         },

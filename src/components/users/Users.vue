@@ -8,11 +8,10 @@ import { mapActions } from 'vuex'
 
 export default {
   created () {
-    console.log('fetch')
-    this.fetchModel({link: '/api/users.json'})
+    this.fetchUsers()
   },
   methods: {
-    ...mapActions('api', (['fetchModel']))
+    ...mapActions('users', (['fetchUsers']))
   }
 }
 </script>

@@ -28,7 +28,6 @@ export default {
   },
   watch: {
     drawer () {
-      console.log('changeNavIsOpen')
       if (this.drawer !== this.leftNavIsOpen) {
         this.changeNavIsOpen()
       }

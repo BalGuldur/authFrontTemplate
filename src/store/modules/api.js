@@ -1,10 +1,7 @@
 // TODO: Add plugin watch auth/userToken getter and change axios.defaults.headers.common
 import axios from 'axios'
 import * as types from '@/store/mutation-types'
-
-const apiProdLink = 'http://lidscatch.skyspace.cloud:80'
-const apiLocalLink = 'http://localhost:3000'
-const authHeaderName = 'Authorization'
+import { apiVerPrefix, apiProdLink, apiLocalLink, authHeaderName } from '@/initializers/Api'
 
 axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? apiLocalLink : apiProdLink
 
@@ -26,22 +23,32 @@ const actions = {
   setAuthHeaders ({getters}, token) {
     getters.axios.defaults.headers.common[authHeaderName] = token
   },
-  post ({getters, dispatch, commit}, {link, params, addErrorType}) {
+  request ({getters, dispatch, commit}, {link, params, method, addErrorType, withoutApiPref}) {
     commit('ERASE_API_ERRORS')
-    return getters.axios.post(link, params).then(
+    const url = withoutApiPref ? link : apiVerPrefix + link // send request with or withoutApiPref
+    return getters.axios.request({url, method, data: params}).then(
       response => Promise.resolve(response)
     ).catch(error => dispatch('rejectError', {error, addErrorType}))
   },
-  get ({getters, dispatch, commit}, {link, params, addErrorType}) {
+  get ({getters, dispatch, commit}, {link, params, addErrorType, withoutApiPref}) {
     commit('ERASE_API_ERRORS')
-    return getters.axios.get(link, {params: params}).then(
+    const url = withoutApiPref ? link : apiVerPrefix + link // send request with or withoutApiPref
+    return getters.axios.get(url, {params}).then(
       response => Promise.resolve(response)
     ).catch(error => dispatch('rejectError', {error, addErrorType}))
   },
   fetchModel ({dispatch, commit}, {link, params}) {
     return dispatch('get', {link, params}).then(
       response => {
-        commit('SET_MODEL', response.data, {root: true}) // Run root mutation
+        commit('SET_MODELS', response.data, {root: true}) // Run root mutation
+        return Promise.resolve(response.data)
+      }
+    )
+  },
+  deleteModelItem ({dispatch, commit}, {link}) {
+    return dispatch('request', {method: 'delete', link}).then(
+      response => {
+        commit('REMOVE_MODELS', response.data, {root: true}) // Run root mutation
         return Promise.resolve(response.data)
       }
     )
@@ -53,18 +60,18 @@ const actions = {
       // that falls out of the range of 2xx
       const errorMutType = addErrorType || 'ADD_API_ERRORS'
       commit(errorMutType, error.response.data, {root: true})
-      return Promise.reject()
     } else if (error.request) {
       // The request was made but no response was received
       // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
       // http.ClientRequest in node.js
       commit('ADD_API_ERRORS', {error: apiErrorStr})
-      return Promise.reject()
+      commit('ADD_API_ERRORS', {error: error.request})
     } else {
       // Something happened in setting up the request that triggered an Error
       commit('ADD_API_ERRORS', {error: apiErrorStr})
-      return Promise.reject()
+      commit('ADD_API_ERRORS', {error: error.message})
     }
+    return Promise.reject()
   }
 }
 

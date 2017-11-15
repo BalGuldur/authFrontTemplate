@@ -1,12 +1,14 @@
 const state = {
+  data: {}
 }
 
 const getters = {
-  users: state => state
+  data: state => state.data
 }
 
 const actions = {
-  fetchUsers () {
+  fetchUsers ({dispatch}) {
+    dispatch('api/fetchModel', {link: '/users.json'}, {root: true})
   }
 }
 
@@ -14,6 +16,7 @@ const mutations = {
 }
 
 export default {
+  namespaced: true,
   state,
   getters,
   actions,
