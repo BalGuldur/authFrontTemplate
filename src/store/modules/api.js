@@ -29,7 +29,13 @@ const actions = {
   post ({getters, dispatch, commit}, {link, params, addErrorType}) {
     commit('ERASE_API_ERRORS')
     return getters.axios.post(link, params).then(
-      response => Promise.resolve(response),
+      response => Promise.resolve(response.data)
+    ).catch(error => dispatch('rejectError', {error, addErrorType}))
+  },
+  get ({getters, dispatch, commit}, {link, params, addErrorType}) {
+    commit('ERASE_API_ERRORS')
+    return getters.axios.get(link, {params: params}).then(
+      response => Promise.resolve(response.data)
     ).catch(error => dispatch('rejectError', {error, addErrorType}))
   },
   // return error in Promise.reject when catch error on axios requiests
