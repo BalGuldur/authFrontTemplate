@@ -25,7 +25,6 @@ const router = new Router({
         { path: '/test', name: 'Тест', component: Hello }
       ],
       beforeEnter: (to, from, next) => {
-        console.log('beforeEnter')
         store.dispatch('auth/checkAuthorization')
           .then(resolve => next(), reject => next('/login'))
       }
