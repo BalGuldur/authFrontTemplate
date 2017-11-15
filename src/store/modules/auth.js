@@ -31,6 +31,7 @@ const actions = {
   },
   signIn ({dispatch, commit}, {user}) {
     commit('ERASE_AUTH_ERRORS')
+    dispatch('api/setAuthHeaders', undefined, {root: true}) // need when user token not empty, but not auth
     dispatch('api/post', {link: '/users/sign_in.json', params: {user}, addErrorType: 'auth/ADD_AUTH_ERRORS'}, {root: true}).then(
       response => {
         // Success sign in, set token and redirect to /
