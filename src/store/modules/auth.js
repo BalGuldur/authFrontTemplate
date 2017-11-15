@@ -57,6 +57,7 @@ const actions = {
       return dispatch('api/post', {link: '/check.json', addErrorType: 'auth/ADD_AUTH_ERRORS'}, {root: true}).then(
         response => {
           dispatch('setToken', token)
+          console.log(response.data)
           commit('SET_CURR_USER', response.data)
           return Promise.resolve()
         },
