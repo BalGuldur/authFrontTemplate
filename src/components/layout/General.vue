@@ -2,13 +2,12 @@
   div
     LeftNav
     TopToolbar
-    main
-      v-content
-        v-container(fluid)
-          v-slide-y-transition mode="out-in"
-            v-layout(column align-center)
-              ShowErrors
-              router-view
+    v-content
+      v-container(fluid full-height)
+        v-slide-y-transition mode="out-in"
+          v-layout(column align-center)
+            ShowErrors
+            router-view
     MyFooter
 </template>
 
