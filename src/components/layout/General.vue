@@ -1,9 +1,9 @@
 <template lang="slm">
-  div
+  v-app
     LeftNav
     TopToolbar
-    v-content
-      v-container(fluid full-height)
+    v-content.padding
+      v-container(fluid)
         v-slide-y-transition mode="out-in"
           v-layout(column align-center)
             ShowErrors

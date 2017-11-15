@@ -1,5 +1,3 @@
 <template>
-  <v-app light>
-    <router-view></router-view>
-  </v-app>
+  <router-view></router-view>
 </template>
