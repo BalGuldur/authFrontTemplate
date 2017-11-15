@@ -2,7 +2,7 @@
   div
     h1 Login
     v-text-field(name="input-1" label="Email" v-model="email")
-    passwordInput v-model="password"
+    passwordInput v-model="password" @keyup.enter.native="signIn({user: {email, password}})"
     v-btn(flat block color="primary" outline @click="signIn({user: {email, password}})") Войти
 </template>
 
