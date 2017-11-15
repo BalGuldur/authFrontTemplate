@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 // templates
 import General from '@/components/layout/General'
-import OutGeneral from '@/components/layout/OutGeneral'
 
 // routes without Nav
 import Hello from '@/components/Hello'
@@ -32,7 +31,7 @@ const router = new Router({
     {
       path: '/',
       name: 'OutGeneral',
-      component: OutGeneral,
+      component: General,
       children: [
         { path: '/login', name: 'Login', component: Login },
         { path: '/regCompany', name: 'RegCompany', component: RegCompany }

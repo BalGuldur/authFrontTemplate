@@ -12,7 +12,7 @@ const setTokenToLs = (token) => {
 }
 // Authenticate and authorizate users
 const state = {
-  currentUser: {},
+  currentUser: undefined,
   userToken: undefined,
   errors: []
 }
@@ -36,12 +36,15 @@ const actions = {
         // Success sign in, set token and redirect to /
         const respToken = response.headers.authorization
         dispatch('setToken', respToken)
+        commit('SET_CURR_USER', response.data)
         router.push('/')
       }
     )
   },
   signOut ({dispatch, commit}) {
+    // TODO: Send logout request to API
     commit('ERASE_AUTH_ERRORS')
+    commit('SET_CURR_USER', undefined)
     dispatch('setToken', undefined)
     router.push('/login')
   },
@@ -53,6 +56,7 @@ const actions = {
       return dispatch('api/post', {link: '/check.json', addErrorType: 'auth/ADD_AUTH_ERRORS'}, {root: true}).then(
         response => {
           dispatch('setToken', token)
+          commit('SET_CURR_USER', response.data)
           return Promise.resolve()
         },
         () => {
@@ -71,6 +75,9 @@ const actions = {
 }
 
 const mutations = {
+  [types.SET_CURR_USER] (state, user) {
+    state.currentUser = user
+  },
   [types.SET_USER_TOKEN] (state, token) {
     state.userToken = token
   },
