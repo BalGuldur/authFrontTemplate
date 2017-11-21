@@ -1,13 +1,33 @@
-<template lang="slm">
+<template lang="pug">
   div
-    template v-if="authErrors.length > 0"
-      v-snackbar(:timeout="authTimeout" :top="authPosition.top" :right="authPosition.right" :multi-line="true" color="error" :value="true")
+    template(v-if="authErrors.length > 0")
+      v-snackbar(
+        :timeout="authTimeout"
+        :top="authPosition.top"
+        :right="authPosition.right"
+        :multi-line="true"
+        color="error"
+        :value="true"
+        )
         div
-          div v-for="error, index in authErrors" :key="'authError' + index" {{ error.error }}
-    template v-if="apiErrors.length > 0"
-      v-snackbar(:timeout="apiTimeout" :top="apiPosition.top" :right="apiPosition.right" :multi-line="true" color="error" :value="true")
+          div(
+            v-for="error, index in authErrors"
+            :key="'authError' + index"
+            ) {{ error.error }}
+    template(v-if="apiErrors.length > 0")
+      v-snackbar(
+        :timeout="apiTimeout"
+        :top="apiPosition.top"
+        :right="apiPosition.right"
+        :multi-line="true"
+        color="error"
+        :value="true"
+        )
         div
-          div v-for="error, index in apiErrors" :key="'apiError' + index" {{ error.error }}
+          div(
+            v-for="error, index in apiErrors"
+            :key="'apiError' + index"
+            ) {{ error.error }}
 </template>
 
 <script>
