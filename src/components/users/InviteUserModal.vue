@@ -3,6 +3,9 @@
     v-card
       v-card-title Пригласить пользователя
       v-card-text
+        v-text-field(name="name" label="Имя" v-model="name")
+        v-text-field(name="surname" label="Фамилия" v-model="surname")
+        v-text-field(name="email" label="Email" v-model="email")
       v-card-actions
         v-btn(
           color="primary"
@@ -19,6 +22,13 @@ export default {
       default: false
     }
   },
+  data () {
+    return {
+      name: '',
+      surname: '',
+      email: ''
+    }
+  }
   computed: {
     isOpen: {
       get () {
