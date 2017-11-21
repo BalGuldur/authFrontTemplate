@@ -31,22 +31,5 @@ export default {
       }
     }
   }
-  // data () {
-  //   return {
-  //     isOpen: this.value
-  //   }
-  // },
-  // watch: {
-  //   value () {
-  //     if (this.value !== this.isOpen) {
-  //       this.isOpen = this.value
-  //     }
-  //   },
-  //   isOpen () {
-  //     if (this.isOpen !== this.value) {
-  //       this.$emit('input', this.isOpen)
-  //     }
-  //   }
-  // }
 }
 </script>
