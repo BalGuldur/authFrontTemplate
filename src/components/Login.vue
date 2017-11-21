@@ -1,9 +1,23 @@
-<template lang="slm">
-  div
+<template lang="pug">
+  div.login
     h1 Login
-    v-text-field(name="input-1" label="Email" v-model="email")
-    passwordInput v-model="password" @keyup.enter.native="signIn({user: {email, password}})"
-    v-btn(flat block color="primary" outline @click="signIn({user: {email, password}})") Войти
+    v-text-field(
+      name="email"
+      label="Email"
+      v-model="email"
+      )
+    passwordInput(
+      v-model="password"
+      @keyup.enter.native="signIn({user: {email, password}})"
+      )
+    v-btn(
+      name="signInBtn"
+      flat
+      block
+      color="primary"
+      outline
+      @click="signIn({user: {email, password}})"
+      ) Войти
 </template>
 
 <script>

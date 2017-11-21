@@ -1,11 +1,15 @@
-<template lang="slm">
-  v-navigation-drawer(persistent enable-resize-watcher app v-model="drawer")
+<template lang="pug">
+  v-navigation-drawer.left-nav(persistent enable-resize-watcher app v-model="drawer")
     v-list
-      v-list-tile v-for="(item, i) in navItems" :key="i" :to="item.link"
+      v-list-tile(
+        v-for="(item, i) in navItems"
+        :key="i"
+        :to="item.link"
+        )
         v-list-tile-action
           v-icon(light v-html="item.icon")
         v-list-tile-content
-          v-list-tile-title v-text="item.title"
+          v-list-tile-title(v-text="item.title")
 </template>
 
 <script>
@@ -28,7 +32,6 @@ export default {
   },
   watch: {
     drawer () {
-      console.log('changeNavIsOpen')
       if (this.drawer !== this.leftNavIsOpen) {
         this.changeNavIsOpen()
       }

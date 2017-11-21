@@ -3,8 +3,11 @@ import Router from 'vue-router'
 // templates
 import General from '@/components/layout/General'
 
-// routes without Nav
+// routes with Nav
 import Hello from '@/components/Hello'
+import Users from '@/components/users/Users'
+
+// routes without Nav
 import Login from '@/components/Login'
 import RegCompany from '@/components/RegCompany'
 // import for link store when reload page (and store in router.app.$store don't init)
@@ -21,7 +24,8 @@ const router = new Router({
       name: 'General',
       component: General,
       children: [
-        { path: '/test', name: 'Тест', component: Hello }
+        { path: '/test', name: 'Тест', component: Hello },
+        { path: '/users', name: 'Пользователи', component: Users }
       ],
       beforeEnter: (to, from, next) => {
         store.dispatch('auth/checkAuthorization')

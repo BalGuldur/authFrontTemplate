@@ -1,6 +1,11 @@
-<template lang="slm">
-  v-snackbar :timeout="timeout" :color="color" :multi-line="mode === 'multi-line'" :verical="mode === 'vertical'" v-model="showed"
-    . {{ text }}
+<template lang="pug">
+  v-snackbar(
+    :timeout="timeout"
+    :color="color"
+    :multi-line="mode === 'multi-line'"
+    :verical="mode === 'vertical'"
+    v-model="showed"
+    ) {{ text }}
 </template>
 
 <script>

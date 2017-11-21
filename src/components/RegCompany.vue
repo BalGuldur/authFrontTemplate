@@ -1,10 +1,16 @@
-<template lang="slm">
+<template lang="pug">
   div
     h1 Регистрация
     v-text-field(name="companyTitle" label="Название комп." v-model="companyTitle")
     v-text-field(name="email" label="Email" v-model="email")
-    passwordInput v-model="password"
-    v-btn(flat block color="primary" outline @click="regCompany({email, companyTitle, password})") Создать компанию
+    passwordInput(v-model="password")
+    v-btn(
+      flat
+      block
+      color="primary"
+      outline
+      @click="regCompany({email, companyTitle, password})"
+      ) Создать компанию
 </template>
 
 <script>

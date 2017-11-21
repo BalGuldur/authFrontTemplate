@@ -5,7 +5,8 @@ const state = {
   leftNavIsOpen: true,
   topNavTitle: '',
   navItems: [
-    {icon: 'list', title: 'Тест', link: '/test'}
+    {icon: 'list', title: 'Тест', link: '/test'},
+    {icon: 'list', title: 'Пользователи', link: '/users'}
   ]
 }
 

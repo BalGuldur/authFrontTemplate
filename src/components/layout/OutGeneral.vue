@@ -1,8 +1,8 @@
-<template lang="slm">
+<template lang="pug">
   v-app
     v-content
       v-container
-        v-slide-y-transition mode="out-in"
+        v-slide-y-transition(mode="out-in")
           v-layout(column align-center)
             ShowErrors
             router-view
