@@ -1,10 +1,10 @@
-<template lang="slm">
+<template lang="pug">
   v-app
     LeftNav
     TopToolbar
     v-content.padding
       v-container(fluid)
-        v-slide-y-transition mode="out-in"
+        v-slide-y-transition(mode="out-in")
           v-layout(column align-center)
             ShowErrors
             ProgressBar

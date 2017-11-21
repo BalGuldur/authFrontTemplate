@@ -1,5 +1,5 @@
-<template lang="slm">
-  v-progress-linear v-if="waitResponse" :indeterminate="true"
+<template lang="pug">
+  v-progress-linear(v-if="waitResponse" :indeterminate="true")
 </template>
 
 <script>

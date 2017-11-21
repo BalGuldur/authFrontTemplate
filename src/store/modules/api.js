@@ -44,7 +44,7 @@ const actions = {
   },
   // fetch model from link with params, if success set all models from response.data
   fetchModel ({dispatch, commit}, {link, params}) {
-    return dispatch('request', {method: 'get', link, params}).then(
+    return dispatch('request', {method: 'get', link: link + '.json', params}).then(
       response => {
         commit('SET_MODELS', response.data, {root: true}) // Run root mutation
         return Promise.resolve(response.data)
@@ -52,8 +52,8 @@ const actions = {
     )
   },
   // delete model from link, if success delete all models from response.data
-  deleteModelItem ({dispatch, commit}, {link}) {
-    return dispatch('request', {method: 'delete', link}).then(
+  deleteModelItem ({dispatch, commit}, {link, item}) {
+    return dispatch('request', {method: 'delete', link: link + '/' + item.id + '.json'}).then(
       response => {
         commit('REMOVE_MODELS', response.data, {root: true}) // Run root mutation
         return Promise.resolve(response.data)
@@ -65,18 +65,24 @@ const actions = {
     if (error.response) {
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx
-      const errorMutType = addErrorType || 'ADD_API_ERRORS'
-      commit(errorMutType, error.response.data, {root: true})
+      const errorMutType = addErrorType || 'api/ADD_API_ERRORS'
+      const data = error.response.data
+      // commit(errorMutType, msg, {root: true})
+      if (Array.isArray(data.error)) {
+        error.response.data.error.map(msg => commit(errorMutType, {error: msg}, {root: true}))
+      } else {
+        commit(errorMutType, data, {root: true})
+      }
     } else if (error.request) {
       // The request was made but no response was received
       // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
       // http.ClientRequest in node.js
       commit('ADD_API_ERRORS', {error: apiErrorStr})
-      commit('ADD_API_ERRORS', {error: error.request})
+      Object.keys(error.request || {}).length > 0 && commit('ADD_API_ERRORS', {error: error.request})
     } else {
       // Something happened in setting up the request that triggered an Error
       commit('ADD_API_ERRORS', {error: apiErrorStr})
-      commit('ADD_API_ERRORS', {error: error.message})
+      Object.keys(error.message || {}).length > 0 && commit('ADD_API_ERRORS', {error: error.message})
     }
     return Promise.reject()
   }

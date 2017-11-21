@@ -3,12 +3,17 @@ const state = {
 }
 
 const getters = {
-  data: state => state.data
+  data: state => state.data,
+  array: state => Object.keys(state.data || {}).map(userId => state.data[userId])
 }
 
 const actions = {
   fetchUsers ({dispatch}) {
-    dispatch('api/fetchModel', {link: '/users.json'}, {root: true})
+    dispatch('api/fetchModel', {link: '/users'}, {root: true})
+  },
+  deleteUser ({dispatch}, user) {
+    // console.log('deleteUser', user)
+    dispatch('api/deleteModelItem', {link: '/users', item: user}, {root: true})
   }
 }
 

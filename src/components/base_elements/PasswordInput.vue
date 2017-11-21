@@ -1,9 +1,17 @@
 <!-- Поле с вводом пароля -->
-<template lang="slm">
-  v-text-field(name="input-10-1" label="Введите пароль" hint="от 8 симв." min="8" :value="value" @input="changeValue" counter
-  :append-icon="secIsOn ? 'visibility' : 'visibility_off'"
-  :append-icon-cb="() => (secIsOn = !secIsOn)"
-  :type="secIsOn ? 'password' : 'text'")
+<template lang="pug">
+  v-text-field(
+    name="password"
+    label="Введите пароль"
+    hint="от 6 симв."
+    min="6"
+    :value="value"
+    @input="changeValue"
+    counter
+    :append-icon="secIsOn ? 'visibility' : 'visibility_off'"
+    :append-icon-cb="() => (secIsOn = !secIsOn)"
+    :type="secIsOn ? 'password' : 'text'"
+    )
 </template>
 
 <script>
