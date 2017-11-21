@@ -1,21 +1,21 @@
 <template lang="pug">
-  v-data-table(
-    :headers="headers"
-    :items="users"
-    hide-actions
-    class="elevation-1"
-    )
-    template(slot="items" slot-scope="props")
-      td {{ props.item.fullname }}
-      td {{ props.item.email }}
-      td
-        v-btn(flat icon)
-          v-icon(:color="props.item.admin ? 'success' : ''" check_box)
-        v-btn(flat icon)
-          v-icon(:color="props.item.admin ? '' : 'success'" indeterminate_check_box)
-      td
-        v-btn(flat icon color="error" @click="deleteUser(props.item)")
-          v-icon delete
+    v-data-table(
+      :headers="headers"
+      :items="users"
+      hide-actions
+      class="elevation-1"
+      )
+      template(slot="items" slot-scope="props")
+        td {{ props.item.fullname }}
+        td {{ props.item.email }}
+        td
+          v-btn(flat icon)
+            v-icon(:color="props.item.admin ? 'success' : ''" check_box)
+          v-btn(flat icon)
+            v-icon(:color="props.item.admin ? '' : 'success'" indeterminate_check_box)
+        td
+          v-btn(flat icon color="error" @click="deleteUser(props.item)")
+            v-icon delete
 </template>
 
 <script>
