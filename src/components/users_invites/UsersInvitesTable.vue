@@ -13,9 +13,9 @@
       class="elevation-1"
       )
       template(slot="items" slot-scope="props")
-        td {{ props.item.user.name }}
-        td {{ props.item.user.surname }}
-        td {{ props.item.user.email }}
+        td {{ props.item.employee.name }}
+        td {{ props.item.employee.surname }}
+        td {{ props.item.employee.email }}
         td
           v-btn(flat icon color="error" @click="deleteUserInvite(props.item)")
             v-icon delete
