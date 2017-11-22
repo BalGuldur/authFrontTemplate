@@ -1,7 +1,10 @@
 <template lang="pug">
   div
-    v-btn(@click.stop="inviteUserIsOpen = true") Пригласить пользователя
-    InviteUserModal(v-model="inviteUserIsOpen")
+    UsersInvitesTable(
+      :userInvites="userInvites"
+      :deleteUserInvite="deleteUserInvite"
+      :inviteUser="inviteUser"
+      )
     UsersTable(
       :users="users"
       :deleteUser="deleteUser"
@@ -10,12 +13,13 @@
 
 <script>
 import UsersTable from './UsersTable'
-import InviteUserModal from './InviteUserModal'
+import InviteUserModal from '@/components/users_invites/InviteUserModal'
+import UsersInvitesTable from '@/components/users_invites/UsersInvitesTable'
 
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
-  components: { UsersTable, InviteUserModal },
+  components: { UsersTable, InviteUserModal, UsersInvitesTable },
 
   data () {
     return {
@@ -24,15 +28,20 @@ export default {
   },
 
   computed: {
-    ...mapGetters({users: 'users/array'})
+    ...mapGetters({
+      users: 'users/array',
+      userInvites: 'userInvites/array'
+    })
   },
 
   methods: {
-    ...mapActions('users', (['fetchUsers', 'deleteUser']))
+    ...mapActions('users', ['fetchUsers', 'deleteUser', 'inviteUser']),
+    ...mapActions('userInvites', ['fetchUserInvites', 'deleteUserInvite'])
   },
 
   created () {
     this.fetchUsers()
+    this.fetchUserInvites()
   }
 }
 </script>

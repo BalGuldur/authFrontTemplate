@@ -1,4 +1,6 @@
 <template lang="pug">
+  v-card
+    v-card-title Пользователи
     v-data-table(
       :headers="headers"
       :items="users"

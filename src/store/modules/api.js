@@ -45,16 +45,28 @@ const actions = {
   },
   // fetch model from link with params, if success set all models from response.data
   fetchModel ({dispatch, commit}, {link, params}) {
-    return dispatch('request', {method: 'get', link: link + '.json', params}).then(
+    return dispatch('request', {method: 'get', link: link + '.json', params})
+    .then(
       response => {
         commit('SET_MODELS', response.data, {root: true}) // Run root mutation
         return Promise.resolve(response.data)
       }
     )
   },
+  // add model from link, if success add all models from response.data
+  addModelItem ({dispatch, commit}, {link, item}) {
+    return dispatch('request', {method: 'post', link: link + '.json', data: item})
+    .then(
+      response => {
+        commit('ADD_MODELS', response.data, {root: true}) // Run root mutation
+        return Promise.resolve(response.data)
+      }
+    )
+  },
   // delete model from link, if success delete all models from response.data
   deleteModelItem ({dispatch, commit}, {link, item}) {
-    return dispatch('request', {method: 'delete', link: link + '/' + item.id + '.json'}).then(
+    return dispatch('request', {method: 'delete', link: link + '/' + item.id + '.json'})
+    .then(
       response => {
         commit('REMOVE_MODELS', response.data, {root: true}) // Run root mutation
         return Promise.resolve(response.data)
