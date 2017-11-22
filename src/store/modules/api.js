@@ -84,6 +84,8 @@ const actions = {
       // commit(errorMutType, msg, {root: true})
       if (Array.isArray(data.error)) {
         data.error.map(msg => commit(errorMutType, {error: msg}, {root: true}))
+      } else if (data.error) {
+        commit(errorMutType, data, {root: true})
       } else if (typeof (data) === 'object') {
         Object.keys(data || {}).map(key => data[key].map(msg => commit(errorMutType, {error: msg}, {root: true})))
       } else {
