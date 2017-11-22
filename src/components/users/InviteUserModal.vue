@@ -12,9 +12,16 @@
           flat
           @click.stop="isOpen = false"
           ) Закрыть
+        v-btn(
+          color="primary"
+          flat
+          @click.stop="invite"
+          ) Пригласить
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   props: {
     value: {
@@ -28,7 +35,7 @@ export default {
       surname: '',
       email: ''
     }
-  }
+  },
   computed: {
     isOpen: {
       get () {
@@ -40,6 +47,14 @@ export default {
         }
       }
     }
+  },
+  methods: {
+    invite () {
+      let { name, surname, email } = this
+      this.inviteUser({name, surname, email})
+      .then(response => { this.isOpen = false })
+    },
+    ...mapActions('users', ['inviteUser'])
   }
 }
 </script>

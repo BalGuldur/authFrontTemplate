@@ -39,7 +39,8 @@ const actions = {
       }
     ).catch(error => {
       commit('DECREMENT_WAIT_REQUESTS')
-      return dispatch('rejectError', {error, addErrorType})
+      dispatch('rejectError', {error, addErrorType})
+      return Promise.reject(error)
     })
   },
   // fetch model from link with params, if success set all models from response.data
@@ -84,7 +85,7 @@ const actions = {
       commit('ADD_API_ERRORS', {error: apiErrorStr})
       Object.keys(error.message || {}).length > 0 && commit('ADD_API_ERRORS', {error: error.message})
     }
-    return Promise.reject()
+    return Promise.resolve()
   }
 }
 

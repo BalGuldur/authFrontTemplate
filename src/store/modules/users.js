@@ -12,8 +12,10 @@ const actions = {
     dispatch('api/fetchModel', {link: '/users'}, {root: true})
   },
   deleteUser ({dispatch}, user) {
-    // console.log('deleteUser', user)
     dispatch('api/deleteModelItem', {link: '/users', item: user}, {root: true})
+  },
+  inviteUser ({dispatch}, user) {
+    return dispatch('api/request', {method: 'post', link: '/users/invite.json', data: {user}}, {root: true})
   }
 }
 
