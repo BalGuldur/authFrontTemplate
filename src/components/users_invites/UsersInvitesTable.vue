@@ -1,8 +1,11 @@
 <template lang="pug">
   v-card
-    v-card-title Приглашенные пользователи
-    v-spacer
-    InviteUserModal(:inviteUser="inviteUser")
+    v-layout(row)
+      v-flex(xs-6)
+        v-card-title Приглашенные пользователи
+      v-spacer
+      v-flex(xs-6)
+        InviteUserModal(:inviteUser="inviteUser")
     v-data-table(
       :headers="headers"
       :items="userInvites"

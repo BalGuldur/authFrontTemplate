@@ -7,8 +7,8 @@ const getters = {
   array: state => Object.keys(state.data || {}).map(userId => state.data[userId])
 }
 
+// TODO: Add check exists data for userInvites
 const actions = {
-  // TODO: Add check exists data for userInvites
   fetchUserInvites ({dispatch}) {
     dispatch('api/fetchModel', {link: '/user_invites'}, {root: true})
   },

@@ -75,6 +75,7 @@ const actions = {
   },
   // return error in Promise.reject when catch error on axios requiests
   rejectError ({commit}, {error, addErrorType}) {
+    // TODO: Add redirect to login if 401 Error
     if (error.response) {
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx
