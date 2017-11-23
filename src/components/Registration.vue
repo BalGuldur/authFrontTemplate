@@ -9,7 +9,7 @@
       block
       color="primary"
       outline
-      @click="regCompany({email, companyTitle, password})"
+      @click="registration"
       ) {{ token ? 'Зарегестрироваться' : 'Создать компанию' }}
     v-btn(
       flat
@@ -40,7 +40,17 @@ export default {
     }
   },
   methods: {
-    ...mapActions('auth', ['regCompany'])
+    registration () {
+      const { email, password, companyTitle, token } = this
+      if (token) {
+        console.log('reg user in company', this.token)
+        this.regUserInvite({email, password, token})
+      } else {
+        this.regCompany({email, password, companyTitle})
+      }
+    },
+    ...mapActions('auth', ['regCompany']),
+    ...mapActions('userInvites', ['regUserInvite'])
   }
 }
 </script>
