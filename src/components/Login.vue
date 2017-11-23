@@ -11,13 +11,19 @@
       @keyup.enter.native="signIn({user: {email, password}})"
       )
     v-btn(
-      name="signInBtn"
       flat
       block
       color="primary"
       outline
       @click="signIn({user: {email, password}})"
       ) Войти
+    v-btn(
+      flat
+      block
+      color="primary"
+      outline
+      @click="$router.push('/registration')"
+      ) Зарегестрироваться
 </template>
 
 <script>

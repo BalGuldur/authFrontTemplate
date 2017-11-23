@@ -9,7 +9,7 @@ import Users from '@/components/users/Users'
 
 // routes without Nav
 import Login from '@/components/Login'
-import RegCompany from '@/components/RegCompany'
+import Registration from '@/components/Registration'
 // import for link store when reload page (and store in router.app.$store don't init)
 import store from '@/store'
 
@@ -37,8 +37,8 @@ const router = new Router({
       name: 'OutGeneral',
       component: General,
       children: [
-        { path: '/login', name: 'Login', component: Login },
-        { path: '/regCompany', name: 'RegCompany', component: RegCompany }
+        { path: '/login', name: 'Авторизация', component: Login },
+        { path: '/registration', name: 'Регистрация', component: Registration }
       ]
     }
   ]
