@@ -6,6 +6,7 @@ import General from '@/components/layout/General'
 // routes with Nav
 import Hello from '@/components/Hello'
 import Users from '@/components/users/Users'
+import UserProfile from '@/components/user_profile/UserProfile'
 
 // routes without Nav
 import Login from '@/components/Login'
@@ -25,7 +26,8 @@ const router = new Router({
       component: General,
       children: [
         { path: '/test', name: 'Тест', component: Hello },
-        { path: '/users', name: 'Пользователи', component: Users }
+        { path: '/users', name: 'Пользователи', component: Users },
+        { path: '/profile', name: 'Профиль', component: UserProfile }
       ],
       beforeEnter: (to, from, next) => {
         store.dispatch('auth/checkAuthorization')
