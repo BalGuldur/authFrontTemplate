@@ -1,7 +1,6 @@
 <template lang="pug">
-  //- TODO: Change router.push to action in modules
   v-btn(
-    @click="$router.push('/profile')"
+    @click="goToProfile"
     flat
     color="indigo"
     )
@@ -10,11 +9,14 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   computed: {
     ...mapGetters('auth', ['currentUser'])
+  },
+  methods: {
+    ...mapActions('navigation', ['goToProfile'])
   }
 }
 </script>

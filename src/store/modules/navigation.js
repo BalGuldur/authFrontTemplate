@@ -1,4 +1,5 @@
 import * as types from '../mutation-types'
+import router from '@/router'
 
 // initial state
 const state = {
@@ -21,6 +22,9 @@ const getters = {
 const actions = {
   changeNavIsOpen ({commit}) {
     commit(types.CHANGE_NAV_IS_OPEN)
+  },
+  goToProfile () {
+    router.push('/profile')
   }
 }
 
