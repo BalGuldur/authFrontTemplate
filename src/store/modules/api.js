@@ -32,46 +32,47 @@ const actions = {
     commit('ERASE_API_ERRORS')
     commit('INCREMENT_WAIT_REQUESTS')
     const url = withoutApiPref ? link : apiVerPrefix + link // send request with or withoutApiPref
-    return getters.axios.request({url, method, data, params}).then(
-      response => {
+    return getters.axios.request({url, method, data, params})
+      .then(
+        response => {
+          commit('DECREMENT_WAIT_REQUESTS')
+          return Promise.resolve(response)
+        }
+      ).catch(error => {
         commit('DECREMENT_WAIT_REQUESTS')
-        return Promise.resolve(response)
-      }
-    ).catch(error => {
-      commit('DECREMENT_WAIT_REQUESTS')
-      dispatch('rejectError', {error, addErrorType})
-      return Promise.reject(error)
-    })
+        dispatch('rejectError', {error, addErrorType})
+        return Promise.reject(error)
+      })
   },
   // fetch model from link with params, if success set all models from response.data
   fetchModel ({dispatch, commit}, {link, params}) {
     return dispatch('request', {method: 'get', link: link + '.json', params})
-    .then(
-      response => {
-        commit('SET_MODELS', response.data, {root: true}) // Run root mutation
-        return Promise.resolve(response.data)
-      }
-    )
+      .then(
+        response => {
+          commit('SET_MODELS', response.data, {root: true}) // Run root mutation
+          return Promise.resolve(response.data)
+        }
+      )
   },
   // add model from link, if success add all models from response.data
   addModelItem ({dispatch, commit}, {link, item}) {
     return dispatch('request', {method: 'post', link: link + '.json', data: item})
-    .then(
-      response => {
-        commit('ADD_MODELS', response.data, {root: true}) // Run root mutation
-        return Promise.resolve(response.data)
-      }
-    )
+      .then(
+        response => {
+          commit('ADD_MODELS', response.data, {root: true}) // Run root mutation
+          return Promise.resolve(response.data)
+        }
+      )
   },
   // delete model from link, if success delete all models from response.data
   deleteModelItem ({dispatch, commit}, {link, item}) {
     return dispatch('request', {method: 'delete', link: link + '/' + item.id + '.json'})
-    .then(
-      response => {
-        commit('REMOVE_MODELS', response.data, {root: true}) // Run root mutation
-        return Promise.resolve(response.data)
-      }
-    )
+      .then(
+        response => {
+          commit('REMOVE_MODELS', response.data, {root: true}) // Run root mutation
+          return Promise.resolve(response.data)
+        }
+      )
   },
   // return error in Promise.reject when catch error on axios requiests
   rejectError ({commit}, {error, addErrorType}) {

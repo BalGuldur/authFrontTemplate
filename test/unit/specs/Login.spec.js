@@ -40,7 +40,7 @@ describe('Login.vue', () => {
     vm.$nextTick()
       .then(() => {
         expect(vm.$el.querySelector('.login div'))
-          .to.exist
+          .to.exist()
         expect(vm.$el.querySeletcor('.login h1').textContent)
           .to.equal('Login')
         done()

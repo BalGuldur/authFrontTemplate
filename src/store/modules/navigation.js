@@ -2,7 +2,7 @@ import * as types from '../mutation-types'
 
 // initial state
 const state = {
-  leftNavIsOpen: true,
+  leftNavIsOpen: false,
   topNavTitle: '',
   navItems: [
     {icon: 'list', title: 'Тест', link: '/test'},

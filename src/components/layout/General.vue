@@ -3,12 +3,13 @@
     LeftNav
     TopToolbar
     v-content.padding
-      v-container(fluid)
-        v-slide-y-transition(mode="out-in")
-          v-layout(column align-center)
-            ShowErrors
-            ProgressBar
-            router-view
+      v-layout(wrap)
+        v-container(fluid)
+          v-slide-y-transition(mode="out-in")
+            v-layout(column align-center)
+              ShowErrors
+              ProgressBar
+              router-view
     MyFooter
 </template>
 

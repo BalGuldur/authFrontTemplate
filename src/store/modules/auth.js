@@ -36,15 +36,15 @@ const actions = {
     commit('ERASE_AUTH_ERRORS')
     dispatch('api/setAuthHeaders', undefined, {root: true}) // need when user token not empty, but not auth
     dispatch('api/request', {method: 'post', link: '/users/sign_in.json', data: {user}, addErrorType, withoutApiPref}, {root: true})
-    .then(
-      response => {
-        // Success sign in, set token and redirect to /
-        const respToken = response.headers.authorization
-        dispatch('setToken', respToken)
-        commit('SET_CURR_USER', response.data)
-        router.push('/')
-      }
-    )
+      .then(
+        response => {
+          // Success sign in, set token and redirect to /
+          const respToken = response.headers.authorization
+          dispatch('setToken', respToken)
+          commit('SET_CURR_USER', response.data)
+          router.push('/')
+        }
+      )
   },
   signOut ({dispatch, commit}) {
     // TODO: Send logout request to API
@@ -66,12 +66,12 @@ const actions = {
         },
         () => {
           commit('ADD_AUTH_ERRORS', {error: needAuthStr})
-          return Promise.reject()
+          return Promise.reject(new Error(needAuthStr))
         }
       )
     } else {
       commit('ADD_AUTH_ERRORS', {error: needAuthStr})
-      return Promise.reject()
+      return Promise.reject(new Error(needAuthStr))
     }
   },
   regCompany ({dispatch, commit}, {email, companyTitle, password}) {
@@ -85,15 +85,15 @@ const actions = {
       link: '/user_invites/registration.json',
       data: userWithToken
     }, {root: true})
-    .then(
-      response => {
-        // Success sign in, set token and redirect to /
-        const respToken = response.headers.authorization
-        dispatch('setToken', respToken)
-        commit('SET_CURR_USER', response.data)
-        router.push('/')
-      }
-    )
+      .then(
+        response => {
+          // Success sign in, set token and redirect to /
+          const respToken = response.headers.authorization
+          dispatch('setToken', respToken)
+          commit('SET_CURR_USER', response.data)
+          router.push('/')
+        }
+      )
   }
 }
 

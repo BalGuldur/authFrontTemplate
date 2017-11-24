@@ -2,20 +2,16 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 
 import Vue from 'vue'
-
 import Vuetify from 'vuetify'
 import './stylus/main.styl'
-
 import App from './App'
-
 import store from './store'
+import router from './router'
 
 import VueLocalStorage from 'vue-ls'
 Vue.use(VueLocalStorage, {namespace: 'vuejs_auth_template__'})
 
 Vue.use(Vuetify)
-
-import router from './router'
 
 Vue.config.productionTip = false
 

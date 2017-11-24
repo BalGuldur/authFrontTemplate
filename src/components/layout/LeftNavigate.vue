@@ -1,5 +1,6 @@
 <template lang="pug">
-  v-navigation-drawer.left-nav(persistent enable-resize-watcher app v-model="drawer")
+  //- v-navigation-drawer.left-nav(persistent enable-resize-watcher app v-model="drawer")
+  v-navigation-drawer.left-nav(temporary disable-resize-watcher v-model="drawer" light absolute)
     v-list
       v-list-tile(
         v-for="(item, i) in navItems"
@@ -18,7 +19,7 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   data () {
     return {
-      drawer: this.leftNavIsOpen,
+      drawer: false,
       items: [
         {icon: 'bubble_chart', title: 'Inspire'}
       ]
@@ -41,6 +42,9 @@ export default {
         this.drawer = this.leftNavIsOpen
       }
     }
+  },
+  created () {
+    this.drawer = this.leftNavIsOpen
   }
 }
 </script>

@@ -51,7 +51,7 @@ export default {
     invite () {
       let { name, surname, email } = this
       this.inviteUser({name, surname, email})
-      .then(response => { this.isOpen = false })
+        .then(response => { this.isOpen = false })
     }
   },
 
