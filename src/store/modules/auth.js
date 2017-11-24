@@ -35,7 +35,8 @@ const actions = {
   signIn ({dispatch, commit}, {user}) {
     commit('ERASE_AUTH_ERRORS')
     dispatch('api/setAuthHeaders', undefined, {root: true}) // need when user token not empty, but not auth
-    dispatch('api/request', {method: 'post', link: '/users/sign_in.json', data: {user}, addErrorType, withoutApiPref}, {root: true}).then(
+    dispatch('api/request', {method: 'post', link: '/users/sign_in.json', data: {user}, addErrorType, withoutApiPref}, {root: true})
+    .then(
       response => {
         // Success sign in, set token and redirect to /
         const respToken = response.headers.authorization
@@ -74,7 +75,25 @@ const actions = {
     }
   },
   regCompany ({dispatch, commit}, {email, companyTitle, password}) {
+    dispatch('api/setAuthHeaders', undefined, {root: true}) // need when user token not empty, but not auth
     dispatch('testSetToken')
+  },
+  regByUserInvite ({dispatch, commit}, userWithToken) {
+    dispatch('api/setAuthHeaders', undefined, {root: true}) // need when user token not empty, but not auth
+    dispatch('api/request', {
+      method: 'post',
+      link: '/user_invites/registration.json',
+      data: userWithToken
+    }, {root: true})
+    .then(
+      response => {
+        // Success sign in, set token and redirect to /
+        const respToken = response.headers.authorization
+        dispatch('setToken', respToken)
+        commit('SET_CURR_USER', response.data)
+        router.push('/')
+      }
+    )
   }
 }
 

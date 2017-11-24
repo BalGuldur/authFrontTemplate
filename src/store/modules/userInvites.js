@@ -14,13 +14,6 @@ const actions = {
   },
   deleteUserInvite ({dispatch}, user) {
     dispatch('api/deleteModelItem', {link: '/user_invites', item: user}, {root: true})
-  },
-  regUserInvite ({dispatch}, userWithToken) {
-    dispatch('api/request', {
-      method: 'post',
-      link: '/user_invites/registration.json',
-      data: userWithToken
-    }, {root: true})
   }
 }
 
