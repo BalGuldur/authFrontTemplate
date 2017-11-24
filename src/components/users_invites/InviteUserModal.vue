@@ -1,28 +1,44 @@
 <template lang="pug">
   div
     v-btn(v-if="!withoutButton" @click.stop="isOpen = true") Пригласить пользователя
-    v-dialog(v-model="isOpen")
+    v-dialog(v-model="isOpen" max-width="500px")
       v-card
         v-card-title Пригласить пользователя
         v-card-text
-          v-text-field(name="name" label="Имя" v-model="name")
-          v-text-field(name="surname" label="Фамилия" v-model="surname")
-          v-text-field(name="email" label="Email" v-model="email")
+          v-form(v-if="isOpen" v-model="valid" lazy-validation)
+            BaseNameField(
+              v-model="name"
+              required
+            )
+            BaseSurnameField(
+              v-model="surname"
+              required
+            )
+            BaseEmailField(
+              v-model="email"
+              required
+            )
         v-card-actions
           v-btn(
             color="primary"
             flat
-            @click.stop="isOpen = false"
+            @click.stop="closeModal"
             ) Закрыть
           v-btn(
             color="primary"
             flat
             @click.stop="invite"
+            :disabled="!valid"
             ) Пригласить
 </template>
 
 <script>
+import BaseNameField from '@/components/base_elements/fields/BaseNameField'
+import BaseSurnameField from '@/components/base_elements/fields/BaseSurnameField'
+import BaseEmailField from '@/components/base_elements/fields/BaseEmailField'
+
 export default {
+  components: { BaseNameField, BaseSurnameField, BaseEmailField },
   props: {
     value: {
       type: Boolean,
@@ -43,7 +59,8 @@ export default {
       name: '',
       surname: '',
       email: '',
-      isOpen: this.value
+      isOpen: this.value,
+      valid: false
     }
   },
 
@@ -52,6 +69,15 @@ export default {
       let { name, surname, email } = this
       this.inviteUser({name, surname, email})
         .then(response => { this.isOpen = false })
+    },
+    resetData () {
+      this.name = ''
+      this.surname = ''
+      this.email = ''
+    },
+    closeModal () {
+      this.resetData()
+      this.isOpen = false
     }
   },
 
