@@ -1,14 +1,15 @@
 <template lang="pug">
-  div
-    UsersInvitesTable(
-      :userInvites="userInvites"
-      :deleteUserInvite="deleteUserInvite"
-      :inviteUser="inviteUser"
-      )
-    UsersTable(
-      :users="users"
-      :deleteUser="deleteUser"
-      )
+  v-layout(column align-center)
+    div
+      UsersInvitesTable(
+        :userInvites="userInvites"
+        :deleteUserInvite="deleteUserInvite"
+        :inviteUser="inviteUser"
+        )
+      UsersTable(
+        :users="users"
+        :deleteUser="deleteUser"
+        )
 </template>
 
 <script>

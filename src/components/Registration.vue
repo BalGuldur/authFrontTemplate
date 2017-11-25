@@ -1,23 +1,24 @@
 <template lang="pug">
-  div
-    h1 Регистрация
-    v-text-field(v-if="!token" name="companyTitle" label="Название комп." v-model="companyTitle")
-    v-text-field(name="email" label="Email" v-model="email")
-    passwordInput(v-model="password")
-    v-btn(
-      flat
-      block
-      color="primary"
-      outline
-      @click="registration"
-      ) {{ token ? 'Зарегестрироваться' : 'Создать компанию' }}
-    v-btn(
-      flat
-      block
-      color="primary"
-      outline
-      @click="$router.push('/login')"
-      ) Авторизоваться
+  v-layout(column align-center)
+    div
+      h1 Регистрация
+      v-text-field(v-if="!token" name="companyTitle" label="Название комп." v-model="companyTitle")
+      v-text-field(name="email" label="Email" v-model="email")
+      passwordInput(v-model="password")
+      v-btn(
+        flat
+        block
+        color="primary"
+        outline
+        @click="registration"
+        ) {{ token ? 'Зарегестрироваться' : 'Создать компанию' }}
+      v-btn(
+        flat
+        block
+        color="primary"
+        outline
+        @click="$router.push('/login')"
+        ) Авторизоваться
 </template>
 
 <script>
