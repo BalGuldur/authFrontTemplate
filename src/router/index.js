@@ -11,6 +11,7 @@ import UserProfile from '@/components/user_profile/UserProfile'
 // routes without Nav
 import Login from '@/components/Login'
 import Registration from '@/components/Registration'
+import VkAuthRedirect from '@/components/oauth_redirects/VkAuthRedirect'
 // import for link store when reload page (and store in router.app.$store don't init)
 import store from '@/store'
 
@@ -40,7 +41,8 @@ const router = new Router({
       component: General,
       children: [
         { path: '/login', name: 'Авторизация', component: Login },
-        { path: '/registration', name: 'Регистрация', component: Registration }
+        { path: '/registration', name: 'Регистрация', component: Registration },
+        { path: '/vk-auth-redirect', component: VkAuthRedirect }
       ]
     }
   ]

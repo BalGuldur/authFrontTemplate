@@ -2,7 +2,8 @@
   v-layout(row wrap)
     v-flex(xs12 sm6 md4 offset-md2)
       v-card
-        v-card-text #1
+        //- TODO: Add User Profile Info
+        v-card-text User Profile Info
     v-flex(xs12 sm6 md4)
       v-card
         v-card-text
