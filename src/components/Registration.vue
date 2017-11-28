@@ -44,7 +44,6 @@ export default {
     registration () {
       const { email, password, companyTitle, token } = this
       if (token) {
-        console.log('reg user in company', this.token)
         this.regByUserInvite({email, password, token})
       } else {
         this.regCompany({email, password, companyTitle})

@@ -8,8 +8,9 @@
     // TODO: Вынести title в vuex
     v-toolbar-title {{ this.$route.name }}
     v-spacer
-    UserAvatar
-    v-btn(v-if="currentUser" @click="signOut") Logout
+    template(v-if="currentUser")
+      UserAvatar
+      v-btn(@click="signOut") Logout
 </template>
 
 <script>

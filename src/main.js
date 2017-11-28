@@ -14,9 +14,7 @@ Vue.use(VueLocalStorage, {namespace: 'vuejs_auth_template__'})
 Vue.use(Vuetify)
 
 Vue.config.productionTip = false
-console.error(window.location.href, window.location)
 if (window.location.pathname === '/vk-auth-redirect') {
-  console.log('hash', window.location.hash)
   window.location.href = window.location.origin + '/#/vk-auth-redirect' + '?' + window.location.hash.split('/')[1]
 }
 

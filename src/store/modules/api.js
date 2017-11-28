@@ -80,7 +80,6 @@ const actions = {
     if (error.response) {
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx
-      console.log('error headers', error.response.headers)
       const errorMutType = addErrorType || 'api/ADD_API_ERRORS'
       const data = error.response.data
       // commit(errorMutType, msg, {root: true})
