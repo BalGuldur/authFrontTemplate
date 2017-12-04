@@ -3,7 +3,7 @@
     v-btn(@click="changeVkAuth")
       v-icon fa-vk
       v-spacer
-      span(v-if="hasVKAccount") Связать с VK
+      span(v-if="!hasVkAccount") Связать с VK
       span(v-else) Отвязать от VK
     v-btn test2
 </template>
@@ -17,11 +17,11 @@ export default {
       if (!this.hasVkAccount) {
         this.vkAuth()
       } else {
-        console.log('delete vk auth')
+        this.deleteSocialAccount(this.socAccsByPlatform['vk'])
       }
     },
     ...mapActions('vkAuth', ['vkAuth']),
-    ...mapActions('socialAccounts', ['fetchSocialAccounts'])
+    ...mapActions('socialAccounts', ['fetchSocialAccounts', 'deleteSocialAccount'])
   },
   computed: {
     hasVkAccount () {
