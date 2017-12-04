@@ -23,6 +23,13 @@
         block
         color="primary"
         outline
+        @click="vkAuth"
+      ) Войти с помощью VK
+      v-btn(
+        flat
+        block
+        color="primary"
+        outline
         @click="$router.push('/registration')"
         ) Зарегестрироваться
 </template>
@@ -41,7 +48,8 @@ export default {
     }
   },
   methods: {
-    ...mapActions('auth', ['signIn'])
+    ...mapActions('auth', ['signIn']),
+    ...mapActions('vkAuth', ['vkAuth'])
   }
 }
 </script>

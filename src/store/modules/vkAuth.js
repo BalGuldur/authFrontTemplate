@@ -31,6 +31,25 @@ const actions = {
         router.push('/profile')
       )
     // router.push('/profile')
+  },
+  signInWithVk ({dispatch, commit}, {vkUserId}) {
+    dispatch('api/setAuthHeaders', undefined, {root: true}) // need when user token not empty, but not auth
+    dispatch('api/request', {
+      method: 'post',
+      link: '/sign_in_with_vk.json',
+      data: {socialUserId: vkUserId},
+      withoutApiPref: true
+    }, {root: true})
+      .then(
+        response => {
+          // Success sign in, set token and redirect to /
+          const respToken = response.headers.authorization
+          dispatch('auth/setToken', respToken, {root: true})
+          commit('SET_CURR_USER', response.data)
+          router.push('/')
+        }
+      )
+      .catch(() => router.push('/'))
   }
 }
 
