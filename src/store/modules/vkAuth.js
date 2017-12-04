@@ -45,7 +45,6 @@ const actions = {
           // Success sign in, set token and redirect to /
           const respToken = response.headers.authorization
           dispatch('auth/setToken', respToken, {root: true})
-          commit('SET_CURR_USER', response.data)
           router.push('/')
         }
       )
